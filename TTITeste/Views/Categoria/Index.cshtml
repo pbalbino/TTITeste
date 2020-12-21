@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Categoria/SubCategoria";
+}
+
+@section CssSection {
+    <link href="~/Content/jquery-confirm.min.css" rel="stylesheet" />
+    <link href="~/Content/gijgo/combined/gijgo.min.css" rel="stylesheet" />
+}
+
+@section Menu {
+    <script src="~/Scripts/Categoria/index-menu.js"></script>
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card card-primary">
+            <h5 class="card-header">Categorias</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="button" id="categoria-adicionar" class="btn btn-default" style="width: 100%"><i class="fas fa-plus-circle"></i>&nbsp;Novo</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="categoria-grid" style="width:100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card card-primary">
+            <h5 class="card-header">SubCategorias</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="button" id="subcategoria-adicionar" class="btn btn-default" style="width: 100%"><i class="fas fa-plus-circle"></i>&nbsp;Novo</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="subcategoria-grid" style="width:100%"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="catsub-dialog" style="display: none;">
+    <div data-role="body">
+        <input name="TipoCadastro" type="hidden" id="catsub-dialog-tipocadastro">
+        <input name="ID" type="hidden" id="catsub-dialog-id">
+        <div class="mb-3">
+            <label for="catsub-dialog-nome" class="form-label">Nome</label>
+            <input type="text" name="Nome" class="form-control" id="catsub-dialog-nome" maxlength="30">
+        </div>
+    </div>
+    <div data-role="footer">
+        <button type="button" id="catsub-dialogo-salvar" class="btn btn-primary fa-pull-right ml-2"><i class="fas fa-save"></i>&nbsp;Salvar</button>
+        <button type="button" id="catsub-dialogo-cancelar" class="btn btn-warning fa-pull-right"><i class="fas fa-ban"></i>&nbsp;Cancelar</button>
+    </div>
+</div>
+@using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryCatSub" }))
+{
+    @Html.AntiForgeryToken()
+}
+
+@section scripts {
+    <script type="text/javascript">
+        var $urlCategoriaGet = "@Url.Action("CategoriaGet")";
+        var $urlSubCategoriaGet = "@Url.Action("SubCategoriaGet")";
+        var $urlCatSubSave = "@Url.Action("CatSubSave")";
+        var $urlCatSubDelete = "@Url.Action("CatSubDelete")";
+    </script>
+    <script src="~/Scripts/gijgo/combined/gijgo.min.js"></script>
+    <script src="~/Scripts/gijgo/combined/messages/messages.pt-br.min.js"></script>
+    <script src="~/Scripts/jquery-confirm.min.js"></script>
+    <script src="~/Scripts/Categoria/index.js"></script>
+}
